@@ -316,6 +316,7 @@ const SkylineProvider = ({ children }) => {
                 handleGetUserProperties,
                 handleGetComments,
                 handleGetAllComments,
+                handleApproveComment,
                 users,
                 setUserId,
                 userId,

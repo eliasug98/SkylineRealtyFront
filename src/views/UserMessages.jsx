@@ -7,6 +7,7 @@ import { useEffect } from 'react';
 export default function UserMessages() {
 
   const {user} = useAuth({ middleware: 'auth' });
+  useAuth({ middleware: 'guest' });
   const {markMessagesAsRead, getUserMessages, userMessages} = useSkyline();
 
   useEffect(() => {

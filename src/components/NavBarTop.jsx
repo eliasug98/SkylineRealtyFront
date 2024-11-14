@@ -17,7 +17,7 @@ export default function NavBarTop() {
   }, [user]);
 
   console.log(userMessages, 'user messages');
-  
+
   // Contar mensajes no leídos
   const unreadMessagesCount = userMessages.filter(message => !message.isRead && message.adminId != 0).length;
 
@@ -38,11 +38,16 @@ export default function NavBarTop() {
         </div>
       </div>
       <div className='flex space-x-2 items-center'>
-        <div className='flex space-x-2 items-center mr-6'>
+        <div className='flex space-x-2 items-center mr-4'>
           {user &&
             <>
-              <Link to="/profile" className=' hover:text-green-800 mr-4'>My Account </Link>
+              {user && user.role == "Admin" ?
+                <Link to="/admin" className=' hover:text-green-800 mr-4 font-bold '>Admin</Link>
+                : ''}
+                <Link to="/profile" className=' hover:text-green-800 mr-4 font-bold '>Profile </Link>
+
               {/* Otros elementos aquí */}
+              {user && user.role == "Client" ?
               <Link to="/messages">
                 {/* Círculo rojo */}
                 {unreadMessagesCount > 0 &&
@@ -53,6 +58,7 @@ export default function NavBarTop() {
                 {/* Icono de mensajes */}
                 <img src="/img/chat.svg" className='w-10' alt="" />
               </Link>
+              : ''}
             </>
           }
         </div>
@@ -60,15 +66,15 @@ export default function NavBarTop() {
         {/* Botones de Cerrar Sesión o Iniciar Sesión */}
         <div className='flex items-center'>
           {user && user.email ? ( // Verifica si hay un usuario autenticado
-            <button onClick={logout} className='text-red-600 hover:text-red-800'>
+            <button onClick={logout} className='text-red-600 hover:text-red-800 font-semibold uppercase'>
               Logout
             </button>
           ) : (
             <>
               <Link to="/auth/login" className='font-semibold uppercase hover:text-[rgb(246,147,20)] mr-2'>
-                Login 
+                Login
               </Link>
-                <p className='font-bold cursor-default'>/</p>
+              <p className='font-bold cursor-default'>/</p>
               <Link to="/auth/register" className='font-semibold uppercase hover:text-[rgb(246,147,20)] ml-2'>
                 Register
               </Link>

@@ -23,7 +23,7 @@ const PropertyDetails = () => {
     const { id } = useParams(); // Obtener el ID de la URL
     const { properties, handleCreateComment, handleGetComments, comments } = useSkyline(); // Obtener las propiedades
     const property = properties.find(prop => prop.id === parseInt(id)); // Encontrar la propiedad por ID
-    const propertyComments = comments.filter(comment => comment.propertyId == id);
+    const propertyComments = comments.filter(comment => comment.propertyId == id && comment.isActive == true);
 
     useEffect(() => {
 
